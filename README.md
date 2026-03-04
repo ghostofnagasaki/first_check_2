@@ -2,6 +2,10 @@
 
 SmartSaver is a Flutter app for tracking spending, managing a monthly budget, and viewing spending analytics based on saved checkout transactions.
 
+## Project status
+
+SmartSaver is an early-stage project. Expect rough edges and breaking changes.
+
 ## Features
 
 - **Cart**
@@ -21,7 +25,7 @@ SmartSaver is a Flutter app for tracking spending, managing a monthly budget, an
 - **Flutter** (Material 3)
 - **State management**: Riverpod
 - **Local DB**: Isar
-- **Backend (optional / in-progress)**: Supabase
+- **Storage model**: Local-first (no backend required)
 
 ## Prerequisites
 
@@ -69,17 +73,6 @@ Local database initialization happens in `lib/main.dart`:
 
 If you see runtime errors related to Isar not being opened/initialized, verify `LocalDbService.init()` is being called before any database usage.
 
-## Configuration (Supabase)
-
-Supabase constants are currently in:
-
-- `lib/core/constants/app_constants.dart`
-
-If you intend to use Supabase in production:
-
-- Move keys/URLs out of source control (for example: `.env` + runtime config)
-- Do not hardcode secrets in the repo
-
 ## Common commands
 
 - Analyze code:
@@ -112,3 +105,22 @@ If you intend to use Supabase in production:
 - **`findAll()` / query methods not found**
   - Ensure the file using Isar queries imports:
     - `package:isar/isar.dart`
+
+## Contributing
+
+Contributions are welcome.
+
+- See `CONTRIBUTING.md`
+- Please follow the `CODE_OF_CONDUCT.md`
+
+## Support
+
+- See `SUPPORT.md`
+
+## Security
+
+- See `SECURITY.md`
+
+## License
+
+MIT. See `LICENSE`.
