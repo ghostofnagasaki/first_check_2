@@ -16,21 +16,21 @@ void main() async {
   final dbService = LocalDbService();
   await dbService.init();
 
-  // TODO: Move initialization logic to Riverpod providers/async providers
+
   // await budgetStore.initialize();
   // await cartStore.init();
   // await libraryStore.init();
 
-  runApp(const ProviderScope(child: SmartSaverApp()));
+  runApp(const ProviderScope(child: FirstCheckApp()));
 }
 
-class SmartSaverApp extends StatelessWidget {
-  const SmartSaverApp({super.key});
+class FirstCheckApp extends StatelessWidget {
+  const FirstCheckApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SmartSaver',
+      title: 'FirstCheck',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

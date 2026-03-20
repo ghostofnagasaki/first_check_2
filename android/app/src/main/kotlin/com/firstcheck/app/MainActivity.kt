@@ -1,4 +1,4 @@
-package com.example.first_check_2
+package com.firstcheck.app
 
 import io.flutter.embedding.android.FlutterActivity
 

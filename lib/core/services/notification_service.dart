@@ -18,8 +18,8 @@ class NotificationService {
   }) async {
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
-        'smartsaver_channel',
-        'SmartSaver Notifications',
+        'firstcheck_channel',
+        'FirstCheck Notifications',
         importance: Importance.max,
         priority: Priority.high,
       ),

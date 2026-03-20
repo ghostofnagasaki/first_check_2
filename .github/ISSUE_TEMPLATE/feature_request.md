@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for SmartSaver
+about: Suggest an idea for FirstCheck
 title: "[Feature]: "
 labels: enhancement
 assignees: ""

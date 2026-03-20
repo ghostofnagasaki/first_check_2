@@ -1,10 +1,10 @@
-# SmartSaver (first_check_2)
+# FirstCheck (firstcheck)
 
-SmartSaver is a Flutter app for tracking spending, managing a monthly budget, and viewing spending analytics based on saved checkout transactions.
+FirstCheck is a Flutter app for tracking spending, managing a monthly budget, and viewing spending analytics based on saved checkout transactions.
 
 ## Project status
 
-SmartSaver is an early-stage project. Expect rough edges and breaking changes.
+FirstCheck is an early-stage project. Expect rough edges and breaking changes.
 
 ## Features
 

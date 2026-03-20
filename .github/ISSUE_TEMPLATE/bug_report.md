@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a bug to help improve SmartSaver
+about: Report a bug to help improve FirstCheck
 title: "[Bug]: "
 labels: bug
 assignees: ""

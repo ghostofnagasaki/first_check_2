@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:first_check_2/features/cart/stores/cart_store.dart';
-import 'package:first_check_2/features/cart/models/cart_item.dart';
+import 'package:firstcheck/features/cart/stores/cart_store.dart';
+import 'package:firstcheck/features/cart/models/cart_item.dart';
 
 void main() {
   group('CartState Unit Tests', () {

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:first_check_2/features/budget/stores/budget_store.dart';
+import 'package:firstcheck/features/budget/stores/budget_store.dart';
 
 void main() {
   group('BudgetState Unit Tests', () {
