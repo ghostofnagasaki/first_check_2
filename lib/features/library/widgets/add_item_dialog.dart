@@ -134,8 +134,11 @@ class _AddItemDialogState extends ConsumerState<AddItemDialog> {
       );
     }
 
-    widget.onAdd(name, price, qty, _category, _isTaxable, discount);
+    final onAdd = widget.onAdd;
     if (mounted) Navigator.pop(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onAdd(name, price, qty, _category, _isTaxable, discount);
+    });
   }
 
   @override

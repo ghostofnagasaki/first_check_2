@@ -71,15 +71,15 @@ class CartScreen extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
               child: Card(
-                elevation: 4,
+                elevation: 4, 
                 shadowColor: isOverBudget
-                    ? Theme.of(context).colorScheme.error.withOpacity(0.2)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                    ? Theme.of(context).colorScheme.error.withValues(alpha: 0.2)
+                    : Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                   side: BorderSide(
                     color: isOverBudget
-                        ? Theme.of(context).colorScheme.error.withOpacity(0.3)
+                        ? Theme.of(context).colorScheme.error.withValues(alpha: 0.3)
                         : Colors.transparent,
                     width: 2,
                   ),
@@ -98,7 +98,7 @@ class CartScreen extends HookConsumerWidget {
                           : [
                               Theme.of(
                                 context,
-                              ).colorScheme.primaryContainer.withOpacity(0.9),
+                              ).colorScheme.primaryContainer.withValues(alpha: 0.9),
                               Theme.of(context).colorScheme.surface,
                             ],
                     ),
@@ -145,10 +145,10 @@ class CartScreen extends HookConsumerWidget {
                               color: isOverBudget
                                   ? Theme.of(
                                       context,
-                                    ).colorScheme.error.withOpacity(0.1)
+                                    ).colorScheme.error.withValues(alpha: 0.1)
                                   : Theme.of(
                                       context,
-                                    ).colorScheme.primary.withOpacity(0.1),
+                                    ).colorScheme.primary.withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -217,30 +217,34 @@ class CartScreen extends HookConsumerWidget {
             Expanded(
               child: cartItems.isEmpty
                   ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.shopping_cart_outlined,
-                            size: 80,
-                            color: Colors.grey[300],
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            'Your cart is empty',
-                            style: Theme.of(context).textTheme.headlineSmall
-                                ?.copyWith(
-                                  color: Colors.grey[500],
-                                  fontWeight: FontWeight.w500,
-                                ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Tap the menu to add items or scan a receipt',
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: Colors.grey[400]),
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.shopping_cart_outlined,
+                              size: 80,
+                              color: Colors.grey[300],
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Your cart is empty',
+                              style: Theme.of(context).textTheme.headlineSmall
+                                  ?.copyWith(
+                                    color: Colors.grey[500],
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Tap the menu to add items or scan a receipt',
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(color: Colors.grey[400]),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : ListView.builder(
@@ -773,29 +777,31 @@ class CartScreen extends HookConsumerWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Budget & Tax Settings'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: budgetController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Monthly Budget (\$)',
-                prefixText: '\$ ',
-                border: OutlineInputBorder(),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: budgetController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Monthly Budget (\$)',
+                  prefixText: '\$ ',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: gctController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'GCT Tax Rate (%)',
-                suffixText: '%',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+              TextField(
+                controller: gctController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'GCT Tax Rate (%)',
+                  suffixText: '%',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         actions: [
           TextButton(

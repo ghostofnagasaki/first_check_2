@@ -157,7 +157,7 @@ class ItemAnalyticsScreen extends StatelessWidget {
                         borderData: FlBorderData(
                           show: true,
                           border: Border.all(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Colors.grey.withValues(alpha: 0.5),
                           ),
                         ),
                         minX: spots.first.x,
