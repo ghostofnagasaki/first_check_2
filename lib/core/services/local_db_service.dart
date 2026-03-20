@@ -59,4 +59,21 @@ class LocalDbService {
         .limit(10)
         .findAll();
   }
+
+  Future<void> importItems(List<LibraryItem> importedItems) async {
+    await _isar.writeTxn(() async {
+      for (final item in importedItems) {
+        final existing = await _isar.libraryItems
+            .filter()
+            .nameEqualTo(item.name, caseSensitive: false)
+            .findFirst();
+        
+        if (existing != null) {
+          // Keep the existing ID to overwrite / update the old item with new data
+          item.id = existing.id;
+        }
+        await _isar.libraryItems.put(item);
+      }
+    });
+  }
 }

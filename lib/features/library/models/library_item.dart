@@ -10,6 +10,18 @@ class PriceHistoryEntry {
   PriceHistoryEntry();
 
   PriceHistoryEntry.create({required this.date, required this.price});
+
+  Map<String, dynamic> toJson() => {
+        'date': date.toIso8601String(),
+        'price': price,
+      };
+
+  factory PriceHistoryEntry.fromJson(Map<String, dynamic> json) {
+    return PriceHistoryEntry.create(
+      date: DateTime.parse(json['date'] as String),
+      price: (json['price'] as num).toDouble(),
+    );
+  }
 }
 
 @collection
@@ -61,5 +73,32 @@ class LibraryItem {
       ..isPerWeight = isPerWeight ?? this.isPerWeight
       ..lastUsedAt = lastUsedAt ?? this.lastUsedAt
       ..priceHistory = priceHistory ?? this.priceHistory;
+  }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'price': price,
+        'isPerWeight': isPerWeight,
+        'category': category,
+        'lastUsedAt': lastUsedAt.toIso8601String(),
+        'priceHistory': priceHistory.map((e) => e.toJson()).toList(),
+      };
+
+  factory LibraryItem.fromJson(Map<String, dynamic> json) {
+    final item = LibraryItem.create(
+      name: json['name'] as String,
+      price: (json['price'] as num).toDouble(),
+      category: (json['category'] as String?) ?? 'Uncategorized',
+      isPerWeight: (json['isPerWeight'] as bool?) ?? false,
+      lastUsedAt: json['lastUsedAt'] != null
+          ? DateTime.parse(json['lastUsedAt'] as String)
+          : null,
+      priceHistory: json['priceHistory'] != null
+          ? (json['priceHistory'] as List)
+              .map((e) => PriceHistoryEntry.fromJson(e as Map<String, dynamic>))
+              .toList()
+          : null,
+    );
+    return item;
   }
 }

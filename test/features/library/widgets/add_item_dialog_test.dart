@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:first_check_2/features/library/widgets/add_item_dialog.dart';
-import 'package:first_check_2/features/library/stores/library_store.dart';
-import 'package:first_check_2/features/library/models/library_item.dart';
+import 'package:firstcheck/features/library/widgets/add_item_dialog.dart';
+import 'package:firstcheck/features/library/stores/library_store.dart';
+import 'package:firstcheck/features/library/models/library_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // We need a mock for the LibraryNotifier
@@ -33,6 +33,18 @@ class MockLibraryNotifier extends Notifier<LibraryState>
 
   @override
   Future<List<LibraryItem>> searchSuggestions(String query) async => [];
+  
+  @override
+  Future<String?> exportLibrary() {
+    // TODO: implement exportLibrary
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<String?> importLibrary() {
+    // TODO: implement importLibrary
+    throw UnimplementedError();
+  }
 }
 
 void main() {

@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/services/local_db_service.dart';
 import '../models/library_item.dart';
@@ -97,6 +101,54 @@ class LibraryNotifier extends Notifier<LibraryState> {
 
   Future<List<LibraryItem>> searchSuggestions(String query) async {
     return await _dbService.searchItems(query);
+  }
+
+  Future<String?> exportLibrary() async {
+    try {
+      final items = await _dbService.getAllItems();
+      final jsonString = jsonEncode(items.map((e) => e.toJson()).toList());
+
+      final outputFile = await FilePicker.platform.saveFile(
+        dialogTitle: 'Export Library',
+        fileName: 'firstcheck_library_backup.json',
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      );
+
+      if (outputFile != null) {
+        final file = File(outputFile);
+        await file.writeAsString(jsonString);
+        return 'Library exported successfully to $outputFile';
+      }
+      return null;
+    } catch (e) {
+      return 'Failed to export library: $e';
+    }
+  }
+
+  Future<String?> importLibrary() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        dialogTitle: 'Import Library Backup',
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+      );
+
+      if (result != null && result.files.single.path != null) {
+        final file = File(result.files.single.path!);
+        final jsonString = await file.readAsString();
+        final List<dynamic> jsonList = jsonDecode(jsonString);
+        
+        final List<LibraryItem> importedItems = jsonList.map((e) => LibraryItem.fromJson(e)).toList();
+        
+        await _dbService.importItems(importedItems);
+        await fetchItems();
+        return 'Successfully imported ${importedItems.length} items.';
+      }
+      return null; // User canceled
+    } catch (e) {
+      return 'Failed to import library: $e';
+    }
   }
 }
 

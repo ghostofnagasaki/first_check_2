@@ -20,6 +20,48 @@ class LibraryScreen extends ConsumerWidget {
             onPressed: () {}, // Could add search here later
             icon: const Icon(Icons.search_rounded),
           ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert_rounded),
+            onSelected: (value) async {
+              if (value == 'export') {
+                final message = await ref.read(libraryProvider.notifier).exportLibrary();
+                if (message != null && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(message)),
+                  );
+                }
+              } else if (value == 'import') {
+                final message = await ref.read(libraryProvider.notifier).importLibrary();
+                if (message != null && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(message)),
+                  );
+                }
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'export',
+                child: Row(
+                  children: [
+                    Icon(Icons.upload_file_rounded, size: 20),
+                    SizedBox(width: 8),
+                    Text('Export Library'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'import',
+                child: Row(
+                  children: [
+                    Icon(Icons.download_rounded, size: 20),
+                    SizedBox(width: 8),
+                    Text('Import Library'),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       body: state.isLoading
